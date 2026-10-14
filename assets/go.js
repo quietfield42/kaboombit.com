@@ -1,0 +1,45 @@
+// Tagged ad links: kaboombit.com/go/<channel> (TRACK-2026-10-14-INSTALL-SOURCE).
+// Sends a phone straight to its store with the channel tag, so App Store Connect and Google Play
+// Console can count installs per ad channel. No cookies, no pixels, nothing stored.
+// Until the apps are live (LIVE = false) the page only shows the two store buttons as "coming soon".
+(function () {
+  var STORE = {
+    LIVE: false,
+    appleId: '',        // App Store app id (digits), from App Store Connect
+    appleToken: '',     // provider token (pt=…), from App Store Connect → campaign link
+    playPackage: 'com.kaboombit.app'
+  };
+  var channel = (document.body.getAttribute('data-channel') || 'web').replace(/[^a-z0-9_-]/gi, '');
+
+  function appleLink() {
+    if (!STORE.appleId) return '';
+    var q = 'ct=' + encodeURIComponent(channel) + '&mt=8' + (STORE.appleToken ? '&pt=' + encodeURIComponent(STORE.appleToken) : '');
+    return 'https://apps.apple.com/app/apple-store/id' + STORE.appleId + '?' + q;
+  }
+  function playLink() {
+    return 'https://play.google.com/store/apps/details?id=' + encodeURIComponent(STORE.playPackage) +
+      '&referrer=' + encodeURIComponent('utm_source=' + channel);
+  }
+
+  var ua = navigator.userAgent || '';
+  var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var android = /Android/.test(ua);
+  var apple = appleLink();
+  var play = playLink();
+
+  if (STORE.LIVE) {
+    if (ios && apple) { location.replace(apple); return; }
+    if (android) { location.replace(play); return; }
+  }
+
+  var a = document.getElementById('go-apple');
+  var g = document.getElementById('go-play');
+  var note = document.getElementById('go-note');
+  if (STORE.LIVE) {
+    if (a && apple) a.href = apple;
+    if (g) g.href = play;
+  } else {
+    [a, g].forEach(function (b) { if (b) { b.removeAttribute('href'); b.setAttribute('aria-disabled', 'true'); b.classList.add('is-soon'); } });
+    if (note) note.hidden = false;
+  }
+})();
