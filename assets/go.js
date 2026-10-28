@@ -4,8 +4,8 @@
 // Until the apps are live (LIVE = false) the page only shows the two store buttons as "coming soon".
 (function () {
   var STORE = {
-    LIVE: false,
-    appleId: '',        // App Store app id (digits), from App Store Connect
+    LIVE: true,
+    appleId: '',        // App Store app id (digits). Empty until the iPhone app is released: the App Store button stays hidden
     appleToken: '',     // provider token (pt=…), from App Store Connect → campaign link
     playPackage: 'com.kaboombit.app'
   };
@@ -37,6 +37,7 @@
   var note = document.getElementById('go-note');
   if (STORE.LIVE) {
     if (a && apple) a.href = apple;
+    else if (a) a.style.display = 'none'; // iPhone app not released yet: Google Play only
     if (g) g.href = play;
   } else {
     [a, g].forEach(function (b) { if (b) { b.removeAttribute('href'); b.setAttribute('aria-disabled', 'true'); b.classList.add('is-soon'); } });
