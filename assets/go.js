@@ -9,7 +9,12 @@
     appleToken: '',     // provider token (pt=…), from App Store Connect → campaign link
     playPackage: 'com.kaboombit.app'
   };
-  var channel = (document.body.getAttribute('data-channel') || 'web').replace(/[^a-z0-9_-]/gi, '');
+  function tag(name, fallback) { return (document.body.getAttribute('data-' + name) || fallback || '').replace(/[^a-z0-9_-]/gi, ''); }
+  var channel = tag('channel', 'web');
+  // utm_* tags for the Google Play referrer (Play Console counts installs by them). Links only, nothing stored.
+  var utm = [['utm_source', tag('source', channel)], ['utm_medium', tag('medium')], ['utm_campaign', tag('campaign')], ['utm_content', tag('content')]]
+    .filter(function (p) { return p[1]; })
+    .map(function (p) { return p[0] + '=' + p[1]; }).join('&');
 
   function appleLink() {
     if (!STORE.appleId) return '';
@@ -18,7 +23,7 @@
   }
   function playLink() {
     return 'https://play.google.com/store/apps/details?id=' + encodeURIComponent(STORE.playPackage) +
-      '&referrer=' + encodeURIComponent('utm_source=' + channel);
+      '&referrer=' + encodeURIComponent(utm);
   }
 
   var ua = navigator.userAgent || '';

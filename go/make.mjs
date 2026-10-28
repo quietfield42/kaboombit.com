@@ -4,9 +4,25 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const CHANNELS = ['meta', 'tiktok', 'google', 'ig', 'fb', 'yt', 'tt', 'groups', 'press'];
+// path: the page at go/<path>. source (default: path)/medium/campaign/content become the utm_* tags in the Google
+// Play referrer (and the App Store ct= tag is the path). Links only: no pixels, no cookies.
+const PAID = { medium: 'paid_social', campaign: 'launch_test' };
+const CHANNELS = [
+  { path: 'meta', source: 'meta', ...PAID },
+  { path: 'meta-a', source: 'meta', ...PAID, content: 'a' },
+  { path: 'meta-b', source: 'meta', ...PAID, content: 'b' },
+  { path: 'tiktok', source: 'tiktok', ...PAID },
+  { path: 'google', source: 'google', medium: 'paid_search', campaign: 'launch_test' },
+  { path: 'ig', medium: 'social' },
+  { path: 'fb', medium: 'social' },
+  { path: 'yt', medium: 'social' },
+  { path: 'tt', medium: 'social' },
+  { path: 'groups', medium: 'social' },
+  { path: 'press', medium: 'referral' },
+];
 const here = dirname(fileURLToPath(import.meta.url));
 
+const attr = (k, v) => (v ? ` data-${k}="${v}"` : '');
 const page = (ch) => `<!doctype html>
 <html lang="en">
 <head>
@@ -23,7 +39,7 @@ const page = (ch) => `<!doctype html>
 .go .is-soon{opacity:.55;cursor:default;pointer-events:none}
 </style>
 </head>
-<body data-channel="${ch}">
+<body data-channel="${ch.path}"${attr('source', ch.source)}${attr('medium', ch.medium)}${attr('campaign', ch.campaign)}${attr('content', ch.content)}>
 <header class="site-header"><div class="wrap"><a class="brand" href="../../" aria-label="Kaboombit home"><img src="../../assets/wordmark.webp" alt="Kaboombit" width="116" height="42"></a></div></header>
 <main id="main" class="go">
 <img class="mascot" src="../../assets/kaboomby-wave.webp" alt="Kaboomby waving" width="220" height="220">
@@ -43,7 +59,7 @@ const page = (ch) => `<!doctype html>
 `;
 
 for (const ch of CHANNELS) {
-  const out = join(here, ch, 'index.html');
+  const out = join(here, ch.path, 'index.html');
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, page(ch));
   console.log('wrote', out);
