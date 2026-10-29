@@ -12,6 +12,8 @@ const CHANNELS = [
   { path: 'meta-a', source: 'meta', ...PAID, content: 'a' },
   { path: 'meta-b', source: 'meta', ...PAID, content: 'b' },
   { path: 'tiktok', source: 'tiktok', ...PAID },
+  { path: 'tiktok-a', source: 'tiktok', ...PAID, content: 'a' },
+  { path: 'tiktok-b', source: 'tiktok', ...PAID, content: 'b' },
   { path: 'google', source: 'google', medium: 'paid_search', campaign: 'launch_test' },
   { path: 'ig', medium: 'social' },
   { path: 'fb', medium: 'social' },
