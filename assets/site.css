@@ -396,6 +396,7 @@ section{padding:clamp(52px,8vw,96px) 0}
 .store-badges a{display:inline-block;line-height:0;border-radius:10px;transition:transform .15s ease}
 .store-badges a:hover{transform:translateY(-2px)}
 .store-badges img{height:50px;width:auto}
+.store-devices{margin-top:12px;font-size:.95rem;opacity:.85}
 
 /* Free demo and unlock panel (WEBSITE-2026-10-14-FREE-DEMO-COPY, Unlock Features Panel Brief) */
 .hero-demo{color:#EADFFA;margin:-4px 0 18px;font-weight:700}
