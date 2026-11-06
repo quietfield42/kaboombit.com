@@ -33,6 +33,7 @@ const page = (ch) => `<!doctype html>
 <a class="btn btn-primary" id="go-apple" href="../../">App Store</a>
 <a class="btn btn-primary" id="go-play" href="../../">Google Play</a>
 </div>
+<p class="store-devices">For iPhone, iPad and Android phones and tablets.</p>
 <p id="go-note" hidden>Coming soon to the App Store and Google Play.</p>
 <p><a href="../../">See how it works</a></p>
 </main>
