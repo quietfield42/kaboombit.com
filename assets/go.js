@@ -5,7 +5,7 @@
 (function () {
   var STORE = {
     LIVE: true,
-    appleId: '',        // App Store app id (digits). Empty until the iPhone app is released: the App Store button stays hidden
+    appleId: '6821511294', // App Store app id (iOS live 6 Nov 2026)
     appleToken: '',     // provider token (pt=…), from App Store Connect → campaign link
     playPackage: 'com.kaboombit.app'
   };
@@ -37,7 +37,7 @@
   var note = document.getElementById('go-note');
   if (STORE.LIVE) {
     if (a && apple) a.href = apple;
-    else if (a) a.style.display = 'none'; // iPhone app not released yet: Google Play only
+    else if (a) a.style.display = 'none'; // no App Store id set: Google Play only
     if (g) g.href = play;
   } else {
     [a, g].forEach(function (b) { if (b) { b.removeAttribute('href'); b.setAttribute('aria-disabled', 'true'); b.classList.add('is-soon'); } });
