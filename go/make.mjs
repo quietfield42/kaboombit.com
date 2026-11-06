@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const CHANNELS = ['meta', 'tiktok', 'google', 'ig', 'fb', 'yt', 'tt', 'groups', 'press'];
+const CHANNELS = ['meta', 'meta-a', 'meta-b', 'tiktok', 'tiktok-a', 'tiktok-b', 'google', 'ig', 'fb', 'yt', 'tt', 'groups', 'press'];
 const here = dirname(fileURLToPath(import.meta.url));
 
 const page = (ch) => `<!doctype html>
