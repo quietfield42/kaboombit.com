@@ -392,10 +392,6 @@ section{padding:clamp(52px,8vw,96px) 0}
 @media (prefers-reduced-motion:reduce){.theatre.no-alpha .kb-player.on img{animation:none}}
 .launch-link{color:#FFD45A;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .launch-link:hover{color:#fff}
-.store-badges{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;margin-top:22px}
-.store-badges a{display:inline-block;line-height:0;border-radius:10px;transition:transform .15s ease}
-.store-badges a:hover{transform:translateY(-2px)}
-.store-badges img{height:50px;width:auto}
 
 /* Free demo and unlock panel (WEBSITE-2026-10-14-FREE-DEMO-COPY, Unlock Features Panel Brief) */
 .hero-demo{color:#EADFFA;margin:-4px 0 18px;font-weight:700}
