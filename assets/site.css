@@ -489,3 +489,6 @@ html.kb-play,html.kb-play body{overflow:hidden;height:100%;overscroll-behavior:n
 .soundhint{display:none;position:absolute;left:12px;top:12px;border:0;border-radius:999px;background:var(--gold);color:var(--ink);font:800 .9rem/1 var(--body);padding:10px 16px;min-height:40px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .stage-frame.started.muted .soundhint{display:inline-flex;align-items:center}
 .stage-frame.failed .soundhint{display:none}
+
+/* Free-movie offer (20 Nov 2026). Remove the offer-banner line from index.html and get/index.html when the 100 run out. */
+.offer-banner{background:#FFD45A;color:#2a1650;text-align:center;font:800 .95rem/1.3 var(--body);padding:9px 16px}
